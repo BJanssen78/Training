@@ -1,0 +1,11 @@
+.button {
+  margin: 10px;
+  font-size: 1.7vw;
+  padding: 5px;
+  width: 15vw;
+  text-transform: uppercase;
+  color: white;
+  background-color: rgba(179, 110, 20, 0.836);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.5px;
+}
