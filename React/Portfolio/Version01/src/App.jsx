@@ -1,6 +1,8 @@
-import { Center, Heading } from "@chakra-ui/react";
-import { productCard } from "../public/ProductCard";
-export const App = () => {
+import { Heading } from "@chakra-ui/react";
+import { products } from "../resources/db";
+import { ProductCard } from "../public/ProductCard";
+
+function App() {
   return (
     <>
       <Heading
@@ -11,10 +13,9 @@ export const App = () => {
       >
         Dit is de titel van de pagina
       </Heading>
-      <h1>Vite + React</h1>
-      <productCard />
+      <ProductCard products={products} />
     </>
   );
-};
+}
 
 export default App;
