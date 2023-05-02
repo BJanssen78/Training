@@ -14,7 +14,6 @@ function App() {
 
   const backButton = function () {
     setSelectProductCard();
-    console.log(JSON.stringify(selectProductCard));
   };
 
   return (
@@ -27,7 +26,6 @@ function App() {
       >
         Dit is de titel van de pagina
       </Heading>
-      {/* <ProductList products={products} userSelect={userSelect} /> */}
       {selectProductCard ? (
         <ProductCard product={selectProductCard} back={backButton} />
       ) : (

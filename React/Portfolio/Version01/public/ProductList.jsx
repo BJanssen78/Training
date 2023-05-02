@@ -21,7 +21,13 @@ export const ProductList = ({ products, userSelect }) => {
       >
         {products.map((item) => (
           <>
-            <Card key={item.id} bg={"lightblue"} maxH={"500px"} maxW={"300px"}>
+            <Card
+              key={item.id}
+              bg={"lightblue"}
+              maxH={"500px"}
+              maxW={"300px"}
+              shadow={"5px 5px"}
+            >
               <CardBody
                 cursor={"pointer"}
                 bg={"white"}
