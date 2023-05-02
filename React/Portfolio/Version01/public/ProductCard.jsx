@@ -1,66 +1,59 @@
-import { Tag, Image } from "@chakra-ui/react";
-export const ProductCard = ({ products }) => {
+import {
+  Card,
+  Image,
+  CardBody,
+  Heading,
+  Text,
+  Tag,
+  HStack,
+  Button,
+} from "@chakra-ui/react";
+
+export const ProductCard = ({ product }) => {
   return (
     <>
-      {products.map((item) => (
-        <>
-          <Tag
-            bg={"lightblue"}
-            minW={300}
-            minH={500}
-            // textAlign={"center"}
-            m={"25px"}
-            gap={"25px"}
-            key={item.id}
-          >
-            <Tag
-              width={80}
-              height={80}
-              m={"0 auto"}
-              flexDir={"column"}
-              textAlign={"left"}
+      <HStack
+        spacing={"15px"}
+        flexDir={"row"}
+        flexWrap={"wrap"}
+        m={"15px"}
+        justifyContent={"center"}
+      >
+        {product.map((product) => (
+          <>
+            <Button
+              float={"right"}
+              position={"absolute"}
+              zIndex={1}
+              top={100}
+              right={20}
+              bg={"lightblue"}
             >
-              <Image alt={item.imgalt} src={item.imgsrc}>
-                {/* <img key={item.id} alt={item.imgalt} src={item.imgsrc} /> */}
-              </Image>
-
-              <h2>{item.name}</h2>
-              <p>Discription : {item.short_discription}</p>
-              <p>Made by : {item.brand}</p>
-            </Tag>
-          </Tag>
-        </>
-      ))}
+              Back
+            </Button>
+            <Card
+              key={product.id}
+              bg={"lightblue"}
+              maxH={"500vh"}
+              maxW={"50vw"}
+            >
+              <CardBody
+                bg={"white"}
+                // maxW={"280px"}
+                margin={"15px"}
+                onClick={<ProductCard product={product.id} />}
+              >
+                <Image alt={product.imgalt} src={product.imgsrc} />
+                <Heading>{product.name}</Heading>
+                <Text>Made by : {product.brand}</Text>
+                <label>Discription :</label>
+                <Text>{product.long_discription}</Text>
+                <Tag>Source : {product.source}</Tag>
+              </CardBody>
+            </Card>
+          </>
+        ))}
+      </HStack>
     </>
-    // <Tag
-    //   bg={"lightblue"}
-    //   minW={300}
-    //   minH={500}
-    //   // textAlign={"center"}
-    //   m={"25px"}
-    //   gap={"25px"}
-    // >
-    //   <Tag
-    //     width={80}
-    //     height={80}
-    //     m={"0 auto"}
-    //     flexDir={"column"}
-    //     textAlign={"left"}
-    //   >
-    //     <>
-    //       {products.map((item) => (
-    //         <>
-    //           <Image alt={item.imgalt} src={item.imgsrc}>
-    //             {/* <img key={item.id} alt={item.imgalt} src={item.imgsrc} /> */}
-    //           </Image>
-
-    //           <h2>{item.name}</h2>
-    //           <p>Discription : {item.short_discription}</p>
-    //           <p>Made by : {item.brand}</p>
-    //         </>
-    //       ))}
-    //     </>
-    //   </Tag>
-    // </Tag>
   );
 };
