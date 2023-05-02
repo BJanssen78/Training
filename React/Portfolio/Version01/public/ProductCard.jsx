@@ -9,7 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ product, back }) => {
   return (
     <>
       <HStack
@@ -28,6 +28,7 @@ export const ProductCard = ({ product }) => {
               top={100}
               right={20}
               bg={"lightblue"}
+              onClick={() => back()}
             >
               Back
             </Button>

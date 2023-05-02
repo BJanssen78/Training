@@ -12,6 +12,11 @@ function App() {
     setSelectProductCard(selectedProductcard);
   };
 
+  const backButton = function () {
+    setSelectProductCard();
+    console.log(JSON.stringify(selectProductCard));
+  };
+
   return (
     <>
       <Heading
@@ -24,7 +29,7 @@ function App() {
       </Heading>
       {/* <ProductList products={products} userSelect={userSelect} /> */}
       {selectProductCard ? (
-        <ProductCard product={selectProductCard} />
+        <ProductCard product={selectProductCard} back={backButton} />
       ) : (
         <ProductList products={products} userSelect={userSelect} />
       )}
