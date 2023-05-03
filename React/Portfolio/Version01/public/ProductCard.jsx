@@ -7,6 +7,8 @@ import {
   Tag,
   HStack,
   Button,
+  Divider,
+  Link,
 } from "@chakra-ui/react";
 
 export const ProductCard = ({ product, back }) => {
@@ -40,16 +42,31 @@ export const ProductCard = ({ product, back }) => {
             >
               <CardBody
                 bg={"white"}
-                // maxW={"280px"}
                 margin={"15px"}
+                borderRadius={"15px"}
                 onClick={<ProductCard product={product.id} />}
               >
-                <Image alt={product.imgalt} src={product.imgsrc} />
+                <Image
+                  alt={product.imgalt}
+                  src={product.imgsrc}
+                  borderRadius={"15px"}
+                  border={"1px"}
+                />
+                <Divider
+                  orientation="horizontal"
+                  padding={"5px"}
+                  borderColor={"black"}
+                  opacity={"0.4"}
+                />
                 <Heading>{product.name}</Heading>
                 <Text>Made by : {product.brand}</Text>
                 <label>Discription :</label>
                 <Text>{product.long_discription}</Text>
-                <Tag>Source : {product.source}</Tag>
+                <Link href={product.sourceLink} isExternal paddingTop={"10px"}>
+                  <Tag borderBottom={"1px"} borderRight={"1px"}>
+                    Source : {product.source}
+                  </Tag>
+                </Link>
               </CardBody>
             </Card>
           </>
