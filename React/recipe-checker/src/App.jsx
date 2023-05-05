@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { recipes } from "../db/dbRecipes";
+import { RecipeList } from "../public/RecipeList";
+import { Heading } from "@chakra-ui/react";
+import { SearchRecipe } from "../public/SearchRecipe";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectRecipe, setSelectRecipe] = useState();
+  const [recipeList, setRecipeList] = useState(recipes.toLowerCase());
+  // const breakpoints = {
+  //   sm: "30em", // 480px
+  //   md: "48em", // 768px
+  //   lg: "62em", // 992px
+  //   xl: "80em", // 1280px
+  //   "2xl": "96em", // 1536px
+  // };
 
+  const userSelectRecipe = function (label) {
+    const userSelectedRecipe = recipes.filter(
+      (recipe) => recipe.label === label
+    );
+    setSelectRecipe(userSelectedRecipe);
+  };
+  const userSearch = (label) => {
+    const filterLabel = recipeList.filter((recipe) =>
+      recipe.label.includes(label)
+    );
+    setRecipeList(filterLabel);
+  };
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Heading textAlign={"center"} color={"whiteAlpha.900"}>
+        Winc Recipe Checker
+      </Heading>
+      <SearchRecipe recipes={recipeList} userSearch={userSearch} />
+      <RecipeList recipes={recipeList} userselect={userSelectRecipe} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
