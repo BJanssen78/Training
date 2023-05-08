@@ -3,7 +3,7 @@ import { recipes } from "./dbRecipes";
 const recipeArrayResults = [];
 // const recipeArrayResults2 = [];
 
-export const ConvertDb = () => {
+export const ConvertDb = (recipeDB) => {
   for (let c in recipes.hits) recipeArrayResults.push(recipes.hits[c].recipe);
 
   // recipeArrayResults.forEach((item) => {
@@ -12,6 +12,5 @@ export const ConvertDb = () => {
 
   // console.log(recipeArrayResults);
   // console.log(recipeArrayResults2);
-  console.log(recipes.hits[c]);
   return <></>;
 };
