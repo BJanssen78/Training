@@ -3,28 +3,35 @@ import { recipes } from "../db/dbRecipes";
 import { RecipeList } from "../public/RecipeList";
 import { Heading } from "@chakra-ui/react";
 import { SearchRecipe } from "../public/SearchRecipe";
+import { RecipeDetailCard } from "../public/RecipeDetailsCard";
 
 function App() {
   // const [selectRecipe, setSelectRecipe] = useState();
   const [recipeList, setRecipeList] = useState();
+  const [userSelectRecipe, setUserSelectRecipe] = useState();
   const recipeArrayResults = [];
 
-  let recipesDb = () => {
+  const recipesDb = () => {
     for (let c in recipes.hits) recipeArrayResults.push(recipes.hits[c].recipe);
   };
   recipesDb();
-  // const userSelectRecipe = function (label) {
-  //   const userSelectedRecipe = recipes.filter(
-  //     (recipe) => recipe.label === label
-  //   );
-  //   setSelectRecipe(userSelectedRecipe);
-  // };
+
+  const userSelect = (label) => {
+    const filterRecipe = recipeArrayResults.filter(
+      (recipe) => recipe.label === label
+    );
+    setUserSelectRecipe(filterRecipe);
+  };
+
+  const resetUserSelect = () => {
+    setUserSelectRecipe();
+  };
+
   const userSearch = (label) => {
-    const filterLabel = recipeList.filter((recipe) =>
-      recipe.label.includes(label)
+    const filterLabel = recipeArrayResults.filter((recipe) =>
+      recipe.label.toLowerCase().includes(label)
     );
     setRecipeList(filterLabel);
-    // console.log(recipeArrayResults);
   };
 
   return (
@@ -33,7 +40,19 @@ function App() {
         Winc Recipe Checker
       </Heading>
       <SearchRecipe userSearch={userSearch} />
-      <RecipeList recipes={recipeArrayResults} />
+
+      {userSelectRecipe ? (
+        <RecipeDetailCard recipes={userSelectRecipe} reset={resetUserSelect} />
+      ) : (
+        console.log("Hallo")
+      )}
+      {recipeList ? (
+        <RecipeList recipes={recipeList} />
+      ) : (
+        <RecipeList recipes={recipeArrayResults} userSelect={userSelect} />
+      )}
+
+      {/* <RecipeDetailCard recipes={userSelectRecipe} /> */}
     </>
   );
 }

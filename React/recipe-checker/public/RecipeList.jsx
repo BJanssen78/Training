@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-export const RecipeList = ({ recipes }) => {
+export const RecipeList = ({ recipes, userSelect }) => {
   return (
     <Flex
       flexDir={"row"}
@@ -24,10 +24,13 @@ export const RecipeList = ({ recipes }) => {
             width={"20em"}
             height={"500px"}
             margin={"10px"}
-            shadow={"2px 2px"}
+            shadow={"5px 5px"}
             borderRadius={"25px"}
             key={item.label}
             align={"center"}
+            cursor={"pointer"}
+            _hover={{ shadow: "-5px -5px" }}
+            onClick={() => userSelect(item.label)}
           >
             <CardBody padding={"0"}>
               <Image
