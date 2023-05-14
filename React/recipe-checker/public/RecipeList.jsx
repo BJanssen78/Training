@@ -34,6 +34,7 @@ export const RecipeList = ({ recipes, userSelect }) => {
           >
             <CardBody padding={"0"}>
               <Image
+                key={item.image}
                 src={item.image}
                 alt={item.label}
                 fallbackSrc="https://via.placeholder.com/150"
@@ -48,12 +49,19 @@ export const RecipeList = ({ recipes, userSelect }) => {
                 <CardHeader fontSize={"1.2em"} fontWeight={"bold"}>
                   {item.label}
                 </CardHeader>
-                <Tag bg={"purple.100"}>{item.healthLabels[2]}</Tag>
+                <Tag key={item.healthLabels} bg={"purple.100"}>
+                  {item.healthLabels[2]}
+                </Tag>
                 <Tag bg={"lightgreen"}>{item.dietLabels}</Tag>
-                <Text>Dish: {item.dishType}</Text>
+                <Text key={item.dishType}>Dish: {item.dishType}</Text>
                 <Text>Cautions:</Text>
-                <Tag bg={"lightpink"}>{item.cautions[0]}</Tag>
-                <Tag bg={"lightpink"}>{item.cautions[1]}</Tag>
+                {item.cautions.map((caution) => {
+                  return (
+                    <Tag key={caution} bg={"lightpink"}>
+                      {caution}
+                    </Tag>
+                  );
+                })}
               </Stack>
             </CardBody>
           </Card>

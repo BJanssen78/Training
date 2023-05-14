@@ -28,11 +28,12 @@ function App() {
   };
 
   const userSearch = (label) => {
-    const filterLabel = recipeArrayResults.filter((recipe) =>
-      recipe.label.toLowerCase().includes(label)
-    );
+    const filterLabel = recipes.filter((recipe) => {
+      recipe.label.toLowerCase().includes(label);
+    });
     setRecipeList(filterLabel);
   };
+  console.log(recipeArrayResults[0].healthLabels);
 
   return (
     <>
