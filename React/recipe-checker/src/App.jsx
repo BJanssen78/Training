@@ -27,13 +27,30 @@ function App() {
     setUserSelectRecipe();
   };
 
-  const userSearch = (label) => {
-    const filterLabel = recipes.filter((recipe) => {
-      recipe.label.toLowerCase().includes(label);
+  // const userSearch = (label) => {
+  //   const filterLabel = recipeArrayResults.filter((recipe) =>
+  //     recipe.label.toLowerCase().includes(label)
+  //   );
+  //   return setRecipeList(filterLabel);
+  // };
+
+  const userSearch = (searchTerm) => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    const filterLabel = recipeArrayResults.filter((recipe) => {
+      for (let key in recipe) {
+        if (
+          typeof recipe[key] === "string" &&
+          recipe[key].toLowerCase().includes(lowerCaseSearchTerm)
+        ) {
+          console.log(recipe[key]);
+          // setRecipeList(filterLabel);
+          return true;
+        }
+      }
+      return false;
     });
     setRecipeList(filterLabel);
   };
-  console.log(recipeArrayResults[0].healthLabels);
 
   return (
     <>

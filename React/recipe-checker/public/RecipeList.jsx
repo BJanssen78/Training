@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 export const RecipeList = ({ recipes, userSelect }) => {
+  // const shortHealthLabelList = ["vegan", "vegetarian"];
   return (
     <Flex
       flexDir={"row"}
@@ -49,9 +50,16 @@ export const RecipeList = ({ recipes, userSelect }) => {
                 <CardHeader fontSize={"1.2em"} fontWeight={"bold"}>
                   {item.label}
                 </CardHeader>
-                <Tag key={item.healthLabels} bg={"purple.100"}>
-                  {item.healthLabels[2]}
+                {/* {item.healthLabels.toLowerCase().includes(shortHealthLabelList)} */}
+                <Tag
+                  key={item.healthLabel}
+                  width={"max-content"}
+                  height={"max-content"}
+                  bg={"purple.100"}
+                >
+                  {item.healthLabel}
                 </Tag>
+
                 <Tag bg={"lightgreen"}>{item.dietLabels}</Tag>
                 <Text key={item.dishType}>Dish: {item.dishType}</Text>
                 <Text>Cautions:</Text>
