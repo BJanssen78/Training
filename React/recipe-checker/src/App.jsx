@@ -34,22 +34,55 @@ function App() {
   //   return setRecipeList(filterLabel);
   // };
 
-  const userSearch = (searchTerm) => {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    const filterLabel = recipeArrayResults.filter((recipe) => {
+  // const userSearch = (searchTerm) => {
+  //   const lowerCaseSearchTerm = searchTerm.toLowerCase();
+  //   const filterLabel = recipeArrayResults.filter((recipe) => {
+  //     for (let key in recipe) {
+  //       if (
+  //         typeof recipe[key] === "string" &&
+  //         recipe[key].toLowerCase().includes(lowerCaseSearchTerm)
+  //       ) {
+  //         console.log([key]);
+  //         return true;
+  //       }
+  //     }
+  //     return false;
+  //   });
+  //   setRecipeList(filterLabel);
+  // };
+
+  //1. zoeken in de eerste laag van de array
+  //2. als entry een string is, zoek de vergelijking
+  //3. als de entry een array is, doorzoek de array naar vergelijking
+
+  const userSearch2 = (searchTerm2) => {
+    const filterSearchTerm = recipeArrayResults.filter((recipe) => {
       for (let key in recipe) {
-        if (
-          typeof recipe[key] === "string" &&
-          recipe[key].toLowerCase().includes(lowerCaseSearchTerm)
-        ) {
-          console.log(recipe[key]);
-          // setRecipeList(filterLabel);
-          return true;
+        if (Array.isArray(key)) {
+          for (let keys in key) {
+            if (
+              (typeof key[keys] === "string" || typeof key[keys] === Number) &&
+              key[keys].toLowerCase().includes(searchTerm2)
+            ) {
+              //waarde waar
+              console.log(keys);
+              return true;
+            }
+          }
+          if (
+            (typeof recipe[key] === "string" ||
+              typeof recipe[key] === Number) &&
+            recipe[key].toLowerCase().includes(searchTerm2)
+          ) {
+            console.log(key);
+            return true;
+          } else {
+            return false;
+          }
         }
       }
-      return false;
     });
-    setRecipeList(filterLabel);
+    setRecipeList(filterSearchTerm);
   };
 
   return (
@@ -57,7 +90,7 @@ function App() {
       <Heading textAlign={"center"} color={"whiteAlpha.900"}>
         Winc Recipe Checker
       </Heading>
-      <SearchRecipe userSearch={userSearch} />
+      <SearchRecipe userSearch={userSearch2} />
 
       {userSelectRecipe ? (
         <RecipeDetailCard recipes={userSelectRecipe} reset={resetUserSelect} />
