@@ -52,8 +52,8 @@ function App() {
   // };
 
   //1. zoeken in de eerste laag van de array
-  //2. als entry een string is, zoek de vergelijking
-  //3. als de entry een array is, doorzoek de array naar vergelijking
+  //2. als entry een string is of een nummer, zoek de vergelijking, indien match, dan true, anders false.
+  //3. als de entry een array is, doorzoek de array naar vergelijking, indien match, dan true, anders false.
 
   const userSearch2 = (searchTerm2) => {
     const filterSearchTerm = recipeArrayResults.filter((recipe) => {
