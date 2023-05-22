@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 export const RecipeList = ({ recipes, userSelect }) => {
-  // const shortHealthLabelList = ["vegan", "vegetarian"];
+  const shortHealthLabelList = ["Vegetarian", "Vegan"];
   return (
     <Flex
       flexDir={"row"}
@@ -27,7 +27,7 @@ export const RecipeList = ({ recipes, userSelect }) => {
             margin={"10px"}
             shadow={"5px 5px"}
             borderRadius={"25px"}
-            key={item.label}
+            key={item.url}
             align={"center"}
             cursor={"pointer"}
             _hover={{ shadow: "-5px -5px" }}
@@ -46,21 +46,101 @@ export const RecipeList = ({ recipes, userSelect }) => {
                 objectFit={"cover"}
               />
               <Stack align={"center"}>
-                <Text align={"center"}>{item.mealType}</Text>
-                <CardHeader fontSize={"1.2em"} fontWeight={"bold"}>
+                <Text key={item.mealType} align={"center"}>
+                  {item.mealType}
+                </Text>
+                <CardHeader
+                  key={item.label}
+                  fontSize={"1.2em"}
+                  fontWeight={"bold"}
+                >
                   {item.label}
                 </CardHeader>
-                {/* {item.healthLabels.toLowerCase().includes(shortHealthLabelList)} */}
-                <Tag
-                  key={item.healthLabel}
-                  width={"max-content"}
-                  height={"max-content"}
-                  bg={"purple.100"}
-                >
-                  {item.healthLabel}
-                </Tag>
 
-                <Tag bg={"lightgreen"}>{item.dietLabels}</Tag>
+                {/* {if (shortHealthLabelList.some(v => healthLabels.includes(v))){
+                  return (
+                    <Tag
+                    key={item.healthLabels.indexOf(e) >= 0}
+                    width={"max-content"}
+                    height={"max-content"}
+                    bg={"purple.100"}
+                  >
+                    {item.healthLabels.indexOf(e) >= 0}
+                  </Tag>)
+                }} */}
+                {shortHealthLabelList.some(function (v) {
+                  // console.log(v);
+                  if (
+                    shortHealthLabelList.some((v) =>
+                      item.healthLabels.includes(v)
+                    )
+                  ) {
+                    // console.log(shortHealthLabelList);
+                    // console.log(item.healthLabels.indexOf(v) >= 0);
+                    // console.log(item.healthLabels.indexOf("Vegetarian"));
+                    // console.log(item.healthLabels.indexOf("Vegan"));
+                    // console.log(v);
+                    // // console.log(item.healthLabels[v]);
+                    // return (
+                    <Tag
+                      key={v}
+                      width={"max-content"}
+                      height={"max-content"}
+                      bg={"purple.100"}
+                    >
+                      {v}
+                    </Tag>;
+                    // );
+                  } else {
+                    console.log("Waarom zie ik dit??????");
+                  }
+                })}
+
+                {/* // {shortHealthLabelList.some((e) => {
+                // //   return (
+                // //     <Tag
+                // //       key={item.healthLabels.indexOf(e) >= 0}
+                // //       width={"max-content"}
+                // //       height={"max-content"}
+                // //       bg={"purple.100"}
+                // //     >
+                // //       {item.healthLabels.indexOf(e) >= 0}
+                // //     </Tag>
+                // //   );
+                // // })}
+
+                // // {item.healthLabels.map(function (e) {
+                // //   // console.log(e);
+                // //   if (item.healthLabels.includes(shortHealthLabelList)) {
+                // //     return (
+                // //       <Tag
+                // //         key={e}
+                // //         width={"max-content"}
+                // //         height={"max-content"}
+                // //         bg={"purple.100"}
+                // //       >
+                // //         {e}
+                // //       </Tag>
+                // //     );
+                // //   }
+                // //   // return shortHealthLabelList.includes(e);
+                // // })}
+
+                // {/* <Tag
+                //   key={item.healthLabel}
+                //   width={"max-content"}
+                //   height={"max-content"}
+                //   bg={"purple.100"}
+                // >
+                //   {item.healthLabel}
+                // </Tag> */}
+                {item.dietLabels.map((dietLabel) => {
+                  return (
+                    <Tag key={dietLabel} bg={"lightgreen"}>
+                      {dietLabel}
+                    </Tag>
+                  );
+                })}
                 <Text key={item.dishType}>Dish: {item.dishType}</Text>
                 <Text>Cautions:</Text>
                 {item.cautions.map((caution) => {
