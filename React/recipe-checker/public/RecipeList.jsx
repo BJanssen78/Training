@@ -57,6 +57,22 @@ export const RecipeList = ({ recipes, userSelect }) => {
                   {item.label}
                 </CardHeader>
 
+                {shortHealthLabelList.filter((v) => {
+                  if (item.healthLabels.includes(v)) {
+                    return console.log("match " + v);
+                    // <Tag
+                    //   key={v}
+                    //   width={"max-content"}
+                    //   height={"max-content"}
+                    //   bg={"purple.100"}
+                    // >
+                    //   {v}
+                    // </Tag>
+                  } else {
+                    console.log("no match");
+                  }
+                })}
+
                 {/* {if (shortHealthLabelList.some(v => healthLabels.includes(v))){
                   return (
                     <Tag
@@ -68,19 +84,22 @@ export const RecipeList = ({ recipes, userSelect }) => {
                     {item.healthLabels.indexOf(e) >= 0}
                   </Tag>)
                 }} */}
-                {shortHealthLabelList.some(function (v) {
-                  // console.log(v);
+                {/* {shortHealthLabelList.some(function (v) {
+                  console.log(v);
                   if (
                     shortHealthLabelList.some((v) =>
                       item.healthLabels.includes(v)
                     )
                   ) {
                     // console.log(shortHealthLabelList);
-                    // console.log(item.healthLabels.indexOf(v) >= 0);
+                    // console.log(
+                    //   item.healthLabels.indexOf(v) >= 0 ||
+                    //     item.healthLabels.indexOf(v) >= 1
+                    // );
                     // console.log(item.healthLabels.indexOf("Vegetarian"));
-                    // console.log(item.healthLabels.indexOf("Vegan"));
-                    // console.log(v);
-                    // // console.log(item.healthLabels[v]);
+                    console.log(item.healthLabels.indexOf("Vegan"));
+                    console.log(v);
+                    // console.log(item.healthLabels[v]);
                     // return (
                     <Tag
                       key={v}
@@ -94,7 +113,7 @@ export const RecipeList = ({ recipes, userSelect }) => {
                   } else {
                     console.log("Waarom zie ik dit??????");
                   }
-                })}
+                })} */}
 
                 {/* // {shortHealthLabelList.some((e) => {
                 // //   return (
