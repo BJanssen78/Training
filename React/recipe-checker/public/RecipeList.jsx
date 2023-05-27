@@ -57,102 +57,25 @@ export const RecipeList = ({ recipes, userSelect }) => {
                   {item.label}
                 </CardHeader>
 
-                {shortHealthLabelList.filter((v) => {
+                {shortHealthLabelList.map((v) => {
                   if (item.healthLabels.includes(v)) {
-                    return console.log("match " + v);
-                    // <Tag
-                    //   key={v}
-                    //   width={"max-content"}
-                    //   height={"max-content"}
-                    //   bg={"purple.100"}
-                    // >
-                    //   {v}
-                    // </Tag>
+                    // console.log(v);
+                    // console.log(v !== -1);
+                    return (
+                      <Tag
+                        key={v}
+                        width={"max-content"}
+                        height={"max-content"}
+                        bg={"purple.100"}
+                      >
+                        {v}
+                      </Tag>
+                    );
                   } else {
-                    console.log("no match");
+                    return false;
                   }
                 })}
 
-                {/* {if (shortHealthLabelList.some(v => healthLabels.includes(v))){
-                  return (
-                    <Tag
-                    key={item.healthLabels.indexOf(e) >= 0}
-                    width={"max-content"}
-                    height={"max-content"}
-                    bg={"purple.100"}
-                  >
-                    {item.healthLabels.indexOf(e) >= 0}
-                  </Tag>)
-                }} */}
-                {/* {shortHealthLabelList.some(function (v) {
-                  console.log(v);
-                  if (
-                    shortHealthLabelList.some((v) =>
-                      item.healthLabels.includes(v)
-                    )
-                  ) {
-                    // console.log(shortHealthLabelList);
-                    // console.log(
-                    //   item.healthLabels.indexOf(v) >= 0 ||
-                    //     item.healthLabels.indexOf(v) >= 1
-                    // );
-                    // console.log(item.healthLabels.indexOf("Vegetarian"));
-                    console.log(item.healthLabels.indexOf("Vegan"));
-                    console.log(v);
-                    // console.log(item.healthLabels[v]);
-                    // return (
-                    <Tag
-                      key={v}
-                      width={"max-content"}
-                      height={"max-content"}
-                      bg={"purple.100"}
-                    >
-                      {v}
-                    </Tag>;
-                    // );
-                  } else {
-                    console.log("Waarom zie ik dit??????");
-                  }
-                })} */}
-
-                {/* // {shortHealthLabelList.some((e) => {
-                // //   return (
-                // //     <Tag
-                // //       key={item.healthLabels.indexOf(e) >= 0}
-                // //       width={"max-content"}
-                // //       height={"max-content"}
-                // //       bg={"purple.100"}
-                // //     >
-                // //       {item.healthLabels.indexOf(e) >= 0}
-                // //     </Tag>
-                // //   );
-                // // })}
-
-                // // {item.healthLabels.map(function (e) {
-                // //   // console.log(e);
-                // //   if (item.healthLabels.includes(shortHealthLabelList)) {
-                // //     return (
-                // //       <Tag
-                // //         key={e}
-                // //         width={"max-content"}
-                // //         height={"max-content"}
-                // //         bg={"purple.100"}
-                // //       >
-                // //         {e}
-                // //       </Tag>
-                // //     );
-                // //   }
-                // //   // return shortHealthLabelList.includes(e);
-                // // })}
-
-                // {/* <Tag
-                //   key={item.healthLabel}
-                //   width={"max-content"}
-                //   height={"max-content"}
-                //   bg={"purple.100"}
-                // >
-                //   {item.healthLabel}
-                // </Tag> */}
                 {item.dietLabels.map((dietLabel) => {
                   return (
                     <Tag key={dietLabel} bg={"lightgreen"}>
