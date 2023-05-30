@@ -8,6 +8,7 @@ import {
   Tag,
   Stack,
 } from "@chakra-ui/react";
+import React from "react";
 
 export const RecipeList = ({ recipes, userSelect }) => {
   const shortHealthLabelList = ["Vegetarian", "Vegan"];
@@ -20,14 +21,14 @@ export const RecipeList = ({ recipes, userSelect }) => {
       alignContent={"center"}
     >
       {recipes.map((item) => (
-        <>
+        <React.Fragment key={item.label}>
           <Card
             width={"20em"}
             height={"500px"}
             margin={"10px"}
             shadow={"5px 5px"}
             borderRadius={"25px"}
-            key={item.url}
+            // key={item.url}
             align={"center"}
             cursor={"pointer"}
             _hover={{ shadow: "-5px -5px" }}
@@ -56,46 +57,86 @@ export const RecipeList = ({ recipes, userSelect }) => {
                 >
                   {item.label}
                 </CardHeader>
-
-                {shortHealthLabelList.map((v) => {
-                  if (item.healthLabels.includes(v)) {
-                    // console.log(v);
-                    // console.log(v !== -1);
+                <Stack
+                  key={"health-label"}
+                  flexWrap={"wrap"}
+                  width={"100%"}
+                  alignContent={"center"}
+                  flexDirection={"row"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  margin={"0"}
+                  gap={"5px"}
+                >
+                  {shortHealthLabelList.map((v) => {
+                    if (item.healthLabels.includes(v)) {
+                      return (
+                        <Tag
+                          key={v}
+                          margin={"0 !important"}
+                          width={"max-content"}
+                          height={"max-content"}
+                          bg={"purple.100"}
+                        >
+                          {v}
+                        </Tag>
+                      );
+                    } else {
+                      return false;
+                    }
+                  })}
+                </Stack>
+                <Stack
+                  key={"diet-label"}
+                  flexWrap={"wrap"}
+                  width={"100%"}
+                  alignContent={"center"}
+                  flexDirection={"row"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={"5px"}
+                >
+                  {item.dietLabels.map((dietLabel) => {
                     return (
                       <Tag
-                        key={v}
-                        width={"max-content"}
-                        height={"max-content"}
-                        bg={"purple.100"}
+                        margin={"0 !important"}
+                        key={dietLabel}
+                        bg={"lightgreen"}
                       >
-                        {v}
+                        {dietLabel}
                       </Tag>
                     );
-                  } else {
-                    return false;
-                  }
-                })}
-
-                {item.dietLabels.map((dietLabel) => {
-                  return (
-                    <Tag key={dietLabel} bg={"lightgreen"}>
-                      {dietLabel}
-                    </Tag>
-                  );
-                })}
+                  })}
+                </Stack>
                 <Text key={item.dishType}>Dish: {item.dishType}</Text>
                 <Text>Cautions:</Text>
-                {item.cautions.map((caution) => {
-                  return (
-                    <Tag key={caution} bg={"lightpink"}>
-                      {caution}
-                    </Tag>
-                  );
-                })}
+                <Stack
+                  key={"caution-label"}
+                  flexWrap={"wrap"}
+                  width={"100%"}
+                  alignContent={"center"}
+                  flexDirection={"row"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  margin={"0"}
+                  gap={"5px"}
+                >
+                  {item.cautions.map((caution) => {
+                    return (
+                      <Tag
+                        margin={"0 !important"}
+                        key={caution}
+                        bg={"lightpink"}
+                      >
+                        {caution}
+                      </Tag>
+                    );
+                  })}
+                </Stack>
               </Stack>
             </CardBody>
           </Card>
-        </>
+        </React.Fragment>
       ))}
     </Flex>
   );

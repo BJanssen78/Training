@@ -26,85 +26,39 @@ function App() {
     setUserSelectRecipe();
   };
 
-  // const userSearch = (label) => {
-  //   const filterLabel = recipeArrayResults.filter((recipe) =>
-  //     recipe.label.toLowerCase().includes(label)
-  //   );
-  //   return setRecipeList(filterLabel);
-  // };
-
-  const userSearch = (searchTerm) => {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    const filterLabel = recipeArrayResults.filter((recipe) => {
-      for (let key in recipe) {
-        if (
-          typeof recipe[key] === "string" &&
-          recipe[key].toLowerCase().includes(lowerCaseSearchTerm)
-        ) {
-          console.log([key]);
-          return true;
-        }
-      }
-      return false;
-    });
-    setRecipeList(filterLabel);
-  };
-
-  //1. zoeken in de eerste laag van de array
-  //2. als entry een string is of een nummer, zoek de vergelijking, indien match, dan true, anders false.
-  //3. als de entry een array is, doorzoek de array naar vergelijking, indien match, dan true, anders false.
-
   const userSearch3 = (searchTerm3) => {
     const arrayFirstLvl = recipeArrayResults.filter((recipe) => {
       for (let key in recipe) {
         if (
-          (typeof recipe[key] === "string" || typeof recipe[key] === Number) &&
-          recipe[key].toLowerCase().includes(searchTerm3)
+          typeof recipe[key] === "string" ||
+          typeof recipe[key] === "number"
         ) {
-          console.log("True ");
-          // setRecipeList(arrayFirstLvl);
+          if (
+            recipe[key]
+              .toString()
+              .toLowerCase()
+              .includes(searchTerm3.toLowerCase())
+          ) {
+            // console.log("True ");
+            return true;
+          }
         } else if (Array.isArray(recipe[key])) {
-          userSearch3(searchTerm3);
-        } else {
-          console.log("False, dit is niet wat ik wil");
-          return false;
+          for (let item of recipe[key]) {
+            if (
+              (typeof item === "string" || typeof item === "number") &&
+              item.toString().toLowerCase().includes(searchTerm3.toLowerCase())
+            ) {
+              // console.log("True ");
+              return true;
+            }
+          }
         }
       }
+      return false;
     });
+
     setRecipeList(arrayFirstLvl);
   };
-
-  // const userSearch2 = (searchTerm2) => {
-  //   const filterSearchTerm = recipeArrayResults.filter((recipe) => {
-  //     for (let key in recipe) {
-  //       if (Array.isArray(recipe[key])) {
-  //         for (let keys in recipe[key]) {
-  //           if (
-  //             (typeof recipe[key][keys] === "string" ||
-  //               typeof recipe[key][keys] === Number) &&
-  //             recipe[key][keys].toLowerCase().includes(searchTerm2)
-  //           ) {
-  //             //waarde waar
-  //             setRecipeList(filterSearchTerm);
-  //             console.log(keys);
-  //             return true;
-  //           }
-  //         }
-  //         if (
-  //           (typeof recipe[key] === "string" ||
-  //             typeof recipe[key] === Number) &&
-  //           recipe[key].toLowerCase().includes(searchTerm2)
-  //         ) {
-  //           console.log(key);
-  //           return true;
-  //         } else {
-  //           return false;
-  //         }
-  //       }
-  //     }
-  //   });
-  //   setRecipeList(filterSearchTerm);
-  // };
 
   return (
     <>
@@ -115,14 +69,16 @@ function App() {
 
       {userSelectRecipe ? (
         <RecipeDetailCard recipes={userSelectRecipe} reset={resetUserSelect} />
-      ) : (
-        console.log("Hallo")
-      )}
-      {recipeList ? (
-        <RecipeList recipes={recipeList} />
+      ) : recipeList ? (
+        <RecipeList recipes={recipeList} userSelect={userSelect} />
       ) : (
         <RecipeList recipes={recipeArrayResults} userSelect={userSelect} />
       )}
+      {/* {recipeList ? (
+        <RecipeList recipes={recipeList} />
+      ) : (
+        <RecipeList recipes={recipeArrayResults} userSelect={userSelect} />
+      )} */}
 
       {/* <RecipeDetailCard recipes={userSelectRecipe} /> */}
     </>
