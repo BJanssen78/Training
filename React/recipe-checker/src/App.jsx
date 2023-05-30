@@ -74,13 +74,6 @@ function App() {
       ) : (
         <RecipeList recipes={recipeArrayResults} userSelect={userSelect} />
       )}
-      {/* {recipeList ? (
-        <RecipeList recipes={recipeList} />
-      ) : (
-        <RecipeList recipes={recipeArrayResults} userSelect={userSelect} />
-      )} */}
-
-      {/* <RecipeDetailCard recipes={userSelectRecipe} /> */}
     </>
   );
 }
