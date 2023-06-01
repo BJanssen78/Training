@@ -44,7 +44,7 @@ function App() {
       <div className="quote">
         {quote !== "" ? <p>{quote}</p> : <p>No new quotes yet</p>}
         {nameAutor !== "" ? (
-          <span>{nameAutor}</span>
+          <span>- {nameAutor}</span>
         ) : (
           <span>No new author yet</span>
         )}
