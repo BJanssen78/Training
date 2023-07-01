@@ -6,8 +6,8 @@ import {
   CardHeader,
   Flex,
   Text,
-  Spacer,
   Stack,
+  Grid,
 } from "@chakra-ui/react";
 
 export const EventList = () => {
@@ -25,14 +25,7 @@ export const EventList = () => {
           {serverData && serverData.fetchedEventList.length > 0 ? (
             serverData.fetchedEventList.map((item) => (
               <React.Fragment key={item.eventID}>
-                <Card
-                  width={"60vw"}
-                  height={"10em"}
-                  bg={"whiteAlpha.300"}
-                  // margin={"25px"}
-                  gap={"25px"}
-                  rowGap={"25px"}
-                >
+                <Card width={"60vw"} height={"10em"} bg={"whiteAlpha.300"}>
                   <CardBody>
                     <CardHeader
                       color={"blackAlpha.900"}
@@ -44,14 +37,16 @@ export const EventList = () => {
                     >
                       {item.eventName}
                     </CardHeader>
-                    <Text>{item.eventShortDescr}</Text>
-                    <Text
-                      justifyItems={"flex-end"}
-                      alignItems={"flex-end"}
-                      justifyContent={"flex-end"}
-                    >
-                      Date : {item.eventDate}
-                    </Text>
+                    <Grid>
+                      <Text>{item.eventShortDescr}</Text>
+                      <Text
+                        justifyItems={"flex-end"}
+                        alignItems={"flex-end"}
+                        justifyContent={"flex-end"}
+                      >
+                        Date : {item.eventDate}
+                      </Text>
+                    </Grid>
                   </CardBody>
                 </Card>
               </React.Fragment>
