@@ -1,64 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FetchServer } from "../../functions/fetchServer";
 import { Card, CardBody, CardHeader, Flex, Text } from "@chakra-ui/react";
 
 export const EventList = () => {
-  const [serverData, setServerData] = useState();
+  const [serverData, setServerData] = useState(null);
 
-  const fetchServerData = async (data) => {
-    try {
-      const setDataToState = await fetch(data);
-      if (data !== null || data !== "" || data !== undefined) {
-        console.log(data);
-        setServerData(data);
-        console.log(serverData);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const fetchServerData = (data) => {
+    setServerData(data);
   };
-
-  // useEffect(() => {
-  //   fetchServerData();
-  // }, []);
-
-  console.log(serverData?.fetchedEventList);
 
   return (
     <>
       <FetchServer onDataFetched={fetchServerData} />
-      <Flex
-        flexDir={"row"}
-        flexWrap={"wrap"}
-        margin={"15px"}
-        justifyContent={"center"}
-        alignContent={"center"}
-      >
-        {serverData ? (
-          serverData?.fetchedEventList.lenght > 0 ? (
-            serverData?.fetchedEventList.map((item) => {
-              console.log(item);
-              return (
-                <React.Fragment key={item.eventID}>
-                  <Card
-                    width={"20em"}
-                    height={"2em"}
-                    border={"1px solid black"}
-                    bg={"whiteAlpha.100"}
+      <Flex flexDir={"column"} justifyContent={"center"} alignItems={"center"}>
+        {serverData && serverData.fetchedEventList.length > 0 ? (
+          serverData.fetchedEventList.map((item) => (
+            <React.Fragment key={item.eventID}>
+              <Card
+                width={"60vw"}
+                height={"10em"}
+                bg={"whiteAlpha.300"}
+                margin={"25px"}
+              >
+                <CardBody>
+                  <CardHeader
+                    color={"blackAlpha.900"}
+                    textDecoration={"underline"}
+                    textTransform={"uppercase"}
+                    padding={"0"}
+                    fontSize={"1.5em"}
                   >
-                    <CardBody>
-                      <CardHeader>{item.eventName}</CardHeader>
-                      <Text>{item.eventShortDescr}</Text>
-                    </CardBody>
-                  </Card>
-                </React.Fragment>
-              );
-            })
-          ) : (
-            <p>No events have been found</p>
-          )
+                    {item.eventName}
+                  </CardHeader>
+                  <Text>{item.eventShortDescr}</Text>
+                </CardBody>
+              </Card>
+            </React.Fragment>
+          ))
         ) : (
-          <p>Loading...</p>
+          <p>No events found</p>
         )}
       </Flex>
     </>
