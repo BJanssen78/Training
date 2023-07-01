@@ -6,31 +6,21 @@ export const EventList = () => {
   const [serverData, setServerData] = useState();
 
   const fetchServerData = async (data) => {
-    setServerData(data);
-  };
-
-  useEffect(() => {
-    fetchServerData();
-  }, []);
-
-  const fetchData = async () => {
     try {
-      const response = await fetchServer();
-      fetchServer(response);
+      const setDataToState = await fetch(data);
+      if (data !== null || data !== "" || data !== undefined) {
+        console.log(data);
+        setServerData(data);
+        console.log(serverData);
+      }
     } catch (error) {
-      console.error("Error fetching data from server", error);
+      console.log(error);
     }
   };
-  // const fetchServer = async () => {
-  //   // Fetch data from server and return the response
-  //   // ...
 
-  //   // Simulating the fetched response for demonstration
-  //   const response = {
-  //     fetchedEventList: [],
-  //   };
-  //   return response;
-  // };
+  // useEffect(() => {
+  //   fetchServerData();
+  // }, []);
 
   console.log(serverData?.fetchedEventList);
 

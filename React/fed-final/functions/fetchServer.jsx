@@ -46,17 +46,13 @@ export const FetchServer = ({ onDataFetched }) => {
       const userList = await usersResponse.json();
       const categoryList = await categoryResponse.json();
 
+      //Put all collected data in 1 variable to send onDataFetched
       const fetchedDataFromServer = {
         fetchedEventList: eventList,
         fetchedUserList: userList,
         fetchedCatergory: categoryList,
       };
 
-      // console.log("Events:", eventList);
-      // console.log("Users:", userList);
-      // console.log("Categories:", categoryList);
-
-      // handleFetchedData(fetchedDataFromServer);
       onDataFetched(fetchedDataFromServer);
     } catch (error) {
       // Handle any errors that occurred during the request
@@ -64,10 +60,6 @@ export const FetchServer = ({ onDataFetched }) => {
       throw error; // Throw the error if needed
     }
   };
-
-  // const handleFetchedData = (fetchedDataFromServer) => {
-  //   // console.log(fetchedDataFromServer);
-  // };
 
   return null;
 };
