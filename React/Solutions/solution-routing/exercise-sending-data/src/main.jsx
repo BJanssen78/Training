@@ -1,0 +1,50 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {
+  NewPost,
+  action as createPost,
+  loader as newPostLoader,
+} from "./NewPost";
+import { Post, loader as postLoader, action as addComment } from "./Post";
+import { PostList, loader as postListLoader } from "./PostList";
+import { Root } from "./Root";
+import { User, loader as userLoader } from "./User";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <PostList />,
+        loader: postListLoader,
+      },
+      {
+        path: "/post/:postId",
+        element: <Post />,
+        loader: postLoader,
+        action: addComment,
+      },
+      {
+        path: "/user/:userId",
+        element: <User />,
+        loader: userLoader,
+      },
+      {
+        path: "/post/new",
+        element: <NewPost />,
+        action: createPost,
+        loader: newPostLoader,
+      },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("app")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
