@@ -5,9 +5,12 @@ export const Header = () => {
     <>
       <Heading
         textAlign={"center"}
-        color={"white"}
+        color={"#00FF00"}
+        textShadow={"0px 0px 20px rgba(0, 255, 0, 0.9)"}
         textTransform={"uppercase"}
         fontSize={"6xl"}
+        padding={"15px"}
+        textDecor={"underline"}
       >
         Winc Academy Events
       </Heading>
